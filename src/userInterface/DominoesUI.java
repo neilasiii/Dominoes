@@ -1,20 +1,16 @@
 package userInterface;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.util.*;
 
 import core.Game;
 
 
-public class DominoesUI extends JFrame {
+public class DominoesUI extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		DominoesUI frame = new DominoesUI();
@@ -26,7 +22,8 @@ public class DominoesUI extends JFrame {
 	private boolean successfulMove = false;
 	
 	private Game game;
-	private ArrayList playerHand;
+	private ArrayList<JButton> playerHand;
+	private ArrayList<JLabel> computerHand;
 	
 	public DominoesUI() {
 		initGame();
@@ -72,11 +69,18 @@ public class DominoesUI extends JFrame {
 		playerScorePanel.setBorder(BorderFactory.createTitledBorder("Score"));
 		
 		//players Hand Buttons
-		JButton[]playerHandButtons = new JButton[7];
+		playerHand = new ArrayList<JButton>();
 		
 		for (int i = 0; i < 7; i++) {
-			playerHandButtons[i] = new JButton(game.player.getDominoFromHand(i).toString());
-			playerHandPanel.add(playerHandButtons[i]);
+			ImageIcon test = new ImageIcon("src\\images\\" + game.player.getDominoFromHand(i).toValue() + ".png");
+			Image scaleImage = test.getImage().getScaledInstance(80, 120, Image.SCALE_DEFAULT);
+			ImageIcon test2 = new ImageIcon(scaleImage);
+			JButton playerHandButton = new JButton(test2);
+			playerHand.add(playerHandButton);
+			playerHandButton.setBorderPainted(false);
+			playerHandButton.setBorder(null);
+			playerHandButton.setMargin(new Insets(0, 0, 0, 0));
+			playerHandPanel.add(playerHand.get(i));
 		}
 		
 		//Computer Hand Panel
@@ -94,13 +98,19 @@ public class DominoesUI extends JFrame {
 		computerScorePanel.setBorder(BorderFactory.createTitledBorder("Score"));
 		
 		//players Hand Buttons
-		JButton[]computerHandButtons = new JButton[7];
-				
+		//JButton[]computerHandButtons = new JButton[7];
+		computerHand = new ArrayList<JLabel>();
+		
 		for (int i = 0; i < 7; i++) {
-			ImageIcon test = new ImageIcon("images/00.png");
-			computerHandButtons[i] = new JButton(game.computer.getDominoFromHand(i).toString());
-			computerHandButtons[i].setIcon(test);
-			computerHandPanel.add(computerHandButtons[i]);
+			ImageIcon test = new ImageIcon("src\\images\\xx.png");
+			Image scaleImage = test.getImage().getScaledInstance(80, 120, Image.SCALE_DEFAULT);
+			ImageIcon icon = new ImageIcon(scaleImage);
+			JLabel computerHandLabel = new JLabel(icon);
+			computerHand.add(computerHandLabel);
+			//computerHandButtons[i].setBorderPainted(false);
+			//computerHandButtons[i].setBorder(null);
+			//computerHandButtons[i].setMargin(new Insets(0, 0, 0, 0));
+			computerHandPanel.add(computerHand.get(i));
 		}
 		
 		//Menu Panel
@@ -123,5 +133,11 @@ public class DominoesUI extends JFrame {
 		this.add(menuPanel, BorderLayout.WEST);
 				
 		this.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
