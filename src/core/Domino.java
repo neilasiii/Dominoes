@@ -1,7 +1,5 @@
 package core;
 
-import java.awt.Image;
-
 /**
  * This class represents a single Domino.
  * @author Neil Stagner
