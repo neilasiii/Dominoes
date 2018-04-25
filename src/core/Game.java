@@ -15,6 +15,7 @@ public class Game {
 	public JLabel label;
 	public Player player;
 	public Player computer;
+	public int computerDominoIndex = -1;
 	
 	public Game() {
 		dominoes = new Dominoes();
@@ -110,7 +111,7 @@ public class Game {
 	public boolean playComputer() {
 		Domino firstDomino = playedDominoes.get(0);
 		Domino lastDomino  = playedDominoes.get(playedDominoes.size()-1);
-		int computerDominoIndex = computer.findDomino(firstDomino.getLeftVal());
+		computerDominoIndex = computer.findDomino(firstDomino.getLeftVal());
 		
 		if(computerDominoIndex != -1) {
 			Domino insert = computer.getDominoFromHand(computerDominoIndex);
@@ -138,4 +139,14 @@ public class Game {
 		deal();
 		doBegMove(dominoes.drawDomino());
 	}//doFirstMove
+	
+	public String ToStringPlayedTiles() {
+		String toReturn = new String();
+		
+		for (int i = 0; i < playedDominoes.size(); i++) {
+			Domino dom = playedDominoes.get(i);
+			toReturn = toReturn + dom.toString();
+		}
+		return toReturn;
+	}
 }
