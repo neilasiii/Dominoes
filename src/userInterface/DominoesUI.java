@@ -28,6 +28,7 @@ public class DominoesUI extends JFrame {
 	private Game game;
 	private ArrayList<JButton> playerHand;
 	private ArrayList<JLabel> computerHand;
+	private ArrayList<JLabel> playedLabel2;
 	//Menu Variables
 	private JMenuBar menuBar;
 	private JMenu gameMenu;
@@ -138,7 +139,25 @@ public class DominoesUI extends JFrame {
 				playerHand.remove(userChoiceDominoIndex);
 				
 				if(game.playComputer()) {
-					playedDominoesLabel.setText(game.ToStringPlayedTiles());
+					boardPanel.removeAll();
+					
+					for(int i = 0; i < game.playedDominoes.size(); i++) {
+						if(game.playedDominoes.get(i).isDouble()) {
+							ImageIcon test = new ImageIcon("src\\images\\sideways\\" + game.playedDominoes.get(i).toValue() + ".png");
+							Image scaleImage = test.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT);
+							ImageIcon icon = new ImageIcon(scaleImage);
+							JLabel played = new JLabel(icon);
+							playedLabel2.add(i, played);
+							boardPanel.add(playedLabel2.get(i));
+						}else {
+							ImageIcon test = new ImageIcon("src\\images\\sideways\\" + game.playedDominoes.get(i).toValue() + ".png");
+							Image scaleImage = test.getImage().getScaledInstance(90, 60, Image.SCALE_DEFAULT);
+							ImageIcon icon = new ImageIcon(scaleImage);
+							JLabel played = new JLabel(icon);
+							playedLabel2.add(i, played);
+							boardPanel.add(playedLabel2.get(i));
+						}
+					}
 					playerScoreLabel.setText("" + game.player.getScore());
 					computerScoreLabel.setText("" + game.computer.getScore());
 					computerDominoRemove++;
@@ -197,7 +216,27 @@ public class DominoesUI extends JFrame {
 				playerHand.remove(userChoiceDominoIndex);
 				
 				if(game.playComputer()) {
-					playedDominoesLabel.setText(game.ToStringPlayedTiles());
+					//playedDominoesLabel.setText(game.ToStringPlayedTiles());
+					boardPanel.removeAll();
+					
+					for(int i = 0; i < game.playedDominoes.size(); i++) {
+						if(game.playedDominoes.get(i).isDouble()) {
+							ImageIcon test = new ImageIcon("src\\images\\sideways\\" + game.playedDominoes.get(i).toValue() + ".png");
+							Image scaleImage = test.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT);
+							ImageIcon icon = new ImageIcon(scaleImage);
+							JLabel played = new JLabel(icon);
+							playedLabel2.add(i, played);
+							boardPanel.add(playedLabel2.get(i));
+						}else {
+							ImageIcon test = new ImageIcon("src\\images\\sideways\\" + game.playedDominoes.get(i).toValue() + ".png");
+							Image scaleImage = test.getImage().getScaledInstance(90, 60, Image.SCALE_DEFAULT);
+							ImageIcon icon = new ImageIcon(scaleImage);
+							JLabel played = new JLabel(icon);
+							playedLabel2.add(i, played);
+							boardPanel.add(playedLabel2.get(i));
+						}
+					}
+					
 					playerScoreLabel.setText("" + game.player.getScore());
 					computerScoreLabel.setText("" + game.computer.getScore());
 					computerDominoRemove++;
@@ -322,9 +361,26 @@ public class DominoesUI extends JFrame {
 		leftButton.setVisible(false);
 		
 		//Played Label
-		playedDominoesLabel = new JLabel(game.ToStringPlayedTiles());
-		boardPanel.add(playedDominoesLabel);
-		
+		playedLabel2 = new ArrayList<JLabel>();
+		//System.out.println(game.ToStringPlayedTiles());
+		boardPanel.removeAll();
+		for(int i = 0; i < game.playedDominoes.size(); i++) {
+			if(game.playedDominoes.get(i).isDouble()) {
+				ImageIcon test = new ImageIcon("src\\images\\sideways\\" + game.playedDominoes.get(i).toValue() + ".png");
+				Image scaleImage = test.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT);
+				ImageIcon icon = new ImageIcon(scaleImage);
+				JLabel played = new JLabel(icon);
+				playedLabel2.add(i, played);
+				boardPanel.add(playedLabel2.get(i));
+			}else {
+				ImageIcon test = new ImageIcon("src\\images\\sideways\\" + game.playedDominoes.get(i).toValue() + ".png");
+				Image scaleImage = test.getImage().getScaledInstance(90, 60, Image.SCALE_DEFAULT);
+				ImageIcon icon = new ImageIcon(scaleImage);
+				JLabel played = new JLabel(icon);
+				playedLabel2.add(i, played);
+				boardPanel.add(playedLabel2.get(i));
+			}
+		}
 		
 		//player Hand panel
 		playerHandPanel = new JPanel(new GridLayout(1,7));
