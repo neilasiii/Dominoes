@@ -13,18 +13,20 @@ import core.Game;
 
 public class DominoesUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2734434886071421347L;
+
 	public static void main(String[] args) {
 		frame = new DominoesUI();
 
-	}//main
-
-	private int userChoicePosition = -1;
+	}
+	//variables
 	private int userChoiceDominoIndex = -1;
 	private boolean successfulMove = false;
 	private int computerDominoRemove = -1;
-	
 	private static DominoesUI frame;
-	
 	private Game game;
 	private ArrayList<JButton> playerHand;
 	private ArrayList<JLabel> computerHand;
@@ -39,7 +41,6 @@ public class DominoesUI extends JFrame {
 	private JPanel boardPanel;
 	private JButton rightButton;
 	private JButton leftButton;
-	private JLabel playedDominoesLabel;
 	//Player Hand Variables
 	private JPanel playerHandPanel;
 	private JPanel playerScorePanel;
@@ -122,6 +123,31 @@ public class DominoesUI extends JFrame {
 		}
 	}
 	
+	private void gameOver() {
+		if (game.player.getScore() > game.computer.getScore()) {
+			if (JOptionPane.showConfirmDialog(getThisParent(), "You Won!  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				dispose();
+	            frame = new DominoesUI();
+			} else { 
+				System.exit(0);
+			}
+		}else if (game.player.getScore() < game.computer.getScore()){
+			if (JOptionPane.showConfirmDialog(getThisParent(), "You Lost...  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				dispose();
+	            frame = new DominoesUI();
+			} else {
+				System.exit(0);
+			}
+		}else {
+			if (JOptionPane.showConfirmDialog(getThisParent(), "You Tied with the Computer.  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				dispose();
+	            frame = new DominoesUI();
+			} else {
+				System.exit(0);
+			}
+		}
+	}
+	
 	private class RightButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -161,32 +187,15 @@ public class DominoesUI extends JFrame {
 					playerScoreLabel.setText("" + game.player.getScore());
 					computerScoreLabel.setText("" + game.computer.getScore());
 					computerDominoRemove++;
+					
+					if(playerHand.size() == 0) {
+						gameOver();
+					}
 				}else {
 					playerScoreLabel.setText("" + game.player.getScore());
 					computerScoreLabel.setText("" + game.computer.getScore());
 					
-					if (game.player.getScore() > game.computer.getScore()) {
-						if (JOptionPane.showConfirmDialog(getThisParent(), "You Won!  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							dispose();
-				            frame = new DominoesUI();
-						} else { 
-							System.exit(0);
-						}
-					}else if (game.player.getScore() < game.computer.getScore()){
-						if (JOptionPane.showConfirmDialog(getThisParent(), "You Lost...  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							dispose();
-				            frame = new DominoesUI();
-						} else {
-							System.exit(0);
-						}
-					}else {
-						if (JOptionPane.showConfirmDialog(getThisParent(), "You Tied with the Computer.  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							dispose();
-				            frame = new DominoesUI();
-						} else {
-							System.exit(0);
-						}
-					}
+					gameOver();
 				}
 				
 				for (int j = 0; j < game.player.dominoCount(); j++) {
@@ -198,7 +207,7 @@ public class DominoesUI extends JFrame {
 			}
 		}
 	}
-	
+		
 	private class LeftButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -214,6 +223,9 @@ public class DominoesUI extends JFrame {
 				
 				playerHand.get(userChoiceDominoIndex).setVisible(false);
 				playerHand.remove(userChoiceDominoIndex);
+				if(playerHand.size() == 0) {
+					
+				}
 				
 				if(game.playComputer()) {
 					//playedDominoesLabel.setText(game.ToStringPlayedTiles());
@@ -240,32 +252,15 @@ public class DominoesUI extends JFrame {
 					playerScoreLabel.setText("" + game.player.getScore());
 					computerScoreLabel.setText("" + game.computer.getScore());
 					computerDominoRemove++;
+					
+					if(playerHand.size() == 0) {
+						gameOver();
+					}
 				}else {
 					playerScoreLabel.setText("" + game.player.getScore());
 					computerScoreLabel.setText("" + game.computer.getScore());
 					
-					if (game.player.getScore() > game.computer.getScore()) {
-						if (JOptionPane.showConfirmDialog(getThisParent(), "You Won!  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							dispose();
-				            frame = new DominoesUI();
-						} else { 
-							System.exit(0);
-						}
-					}else if (game.player.getScore() < game.computer.getScore()){
-						if (JOptionPane.showConfirmDialog(getThisParent(), "You Lost...  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							dispose();
-				            frame = new DominoesUI();
-						} else {
-							System.exit(0);
-						}
-					}else {
-						if (JOptionPane.showConfirmDialog(getThisParent(), "You Tied with the Computer.  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							dispose();
-				            frame = new DominoesUI();
-						} else {
-							System.exit(0);
-						}
-					}
+					gameOver();
 				}
 				
 				for (int j = 0; j < game.player.dominoCount(); j++) {
@@ -281,28 +276,7 @@ public class DominoesUI extends JFrame {
 	private class EndGameListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (game.player.getScore() > game.computer.getScore()) {
-				if (JOptionPane.showConfirmDialog(getThisParent(), "You Won!  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					dispose();
-		            frame = new DominoesUI();
-				} else { 
-					System.exit(0);
-				}
-			}else if (game.player.getScore() < game.computer.getScore()){
-				if (JOptionPane.showConfirmDialog(getThisParent(), "You Lost...  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					dispose();
-		            frame = new DominoesUI();
-				} else {
-					System.exit(0);
-				}
-			}else {
-				if (JOptionPane.showConfirmDialog(getThisParent(), "You Tied with the Computer.  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					dispose();
-		            frame = new DominoesUI();
-				} else {
-					System.exit(0);
-				}
-			}			
+			gameOver();			
 		}
 	}
 	
@@ -324,8 +298,8 @@ public class DominoesUI extends JFrame {
 	private void initComponents() {
 		this.setTitle("Group 5: Block Dominoes");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setPreferredSize(new Dimension(1000,800));
-		this.setMinimumSize(new Dimension(1000,800));
+		this.setPreferredSize(new Dimension(1200,800));
+		this.setMinimumSize(new Dimension(1200,800));
 		
 		//Menu
 		menuBar = new JMenuBar();
@@ -390,7 +364,7 @@ public class DominoesUI extends JFrame {
 		playerHandPanel.setBorder(BorderFactory.createTitledBorder(game.player.getName() + "'s Hand"));
 		
 		//player Score panel
-		playerScorePanel = new JPanel();
+		playerScorePanel = new JPanel(new GridLayout(2,0));
 		playerScorePanel.setMinimumSize(new Dimension(400,200));
 		playerScorePanel.setMaximumSize(new Dimension(400,200));
 		playerScorePanel.setPreferredSize(new Dimension(400,200));
@@ -400,12 +374,13 @@ public class DominoesUI extends JFrame {
 		playerScoreStr = "" + game.player.getScore();
 		playerScoreLabel = new JLabel(playerScoreStr);
 		playerScoreLabel.setFont(playerScoreLabel.getFont().deriveFont(50.0f));
-		playerScorePanel.add(playerScoreLabel, BorderLayout.CENTER);
+		playerScoreLabel.setHorizontalAlignment(JLabel.CENTER);
+		playerScorePanel.add(playerScoreLabel);
 		
 		//End Game Button
 		endGameButton = new JButton("End Game");
 		endGameButton.addActionListener(new EndGameListener());
-		playerScorePanel.add(endGameButton, BorderLayout.SOUTH);
+		playerScorePanel.add(endGameButton);
 		
 		
 		//players Hand Buttons
