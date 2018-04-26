@@ -22,7 +22,7 @@ public class Game {
 		playedDominoes = new ArrayList<Domino>();
 		player = new Player("Player");
 		computer = new Player("Computer");
-	}//Constructor
+	}
 	
 	/**
 	 * Initializes the game by shuffling dominoes and clearing hands and scores
@@ -34,7 +34,7 @@ public class Game {
 		player.clearScore();
 		computer.clearHand();
 		computer.clearScore();
-	}//initGame
+	}
 	
 	/**
 	 * Deals seven dominoes to both the player and computer.
@@ -47,8 +47,7 @@ public class Game {
 			if(player.dominoCount() == 7 && computer.dominoCount() == 7)
 				return;
 		}
-	}//deal
-	
+	}	
 	
 	/**
 	 * Places a domino to the left.
@@ -77,7 +76,7 @@ public class Game {
 		}else {
 			return false;
 		}
-	}//doRightMove
+	}
 	
 	/**
 	 * Places a domino to the Right.
@@ -100,7 +99,7 @@ public class Game {
 		}else {
 			return false;
 		}
-	}//doLeftMove
+	}
 	
 	/**
 	 * The artificial inteligence of the computer.
@@ -129,7 +128,7 @@ public class Game {
 		}
 		computer.addToScore(playedDominoes.get(0).getLeftVal() + playedDominoes.get(playedDominoes.size()-1).getRightVal());
 		return true;
-	}//playComputer
+	}
 	
 	/**
 	 * Deals to computer and palyer.
@@ -138,7 +137,7 @@ public class Game {
 	public void doFirstMove() {
 		deal();
 		doBegMove(dominoes.drawDomino());
-	}//doFirstMove
+	}
 	
 	public String ToStringPlayedTiles() {
 		String toReturn = new String();

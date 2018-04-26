@@ -19,14 +19,13 @@ public class DominoesUI extends JFrame {
 	private static final long serialVersionUID = -2734434886071421347L;
 
 	public static void main(String[] args) {
-		frame = new DominoesUI();
+		new DominoesUI();
 
 	}
 	//variables
 	private int userChoiceDominoIndex = -1;
 	private boolean successfulMove = false;
 	private int computerDominoRemove = -1;
-	private static DominoesUI frame;
 	private Game game;
 	private ArrayList<JButton> playerHand;
 	private ArrayList<JLabel> computerHand;
@@ -67,7 +66,7 @@ public class DominoesUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			dispose();
-            frame = new DominoesUI();
+            new DominoesUI();
 		}
 	}
 	
@@ -127,21 +126,21 @@ public class DominoesUI extends JFrame {
 		if (game.player.getScore() > game.computer.getScore()) {
 			if (JOptionPane.showConfirmDialog(getThisParent(), "You Won!  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				dispose();
-	            frame = new DominoesUI();
+	            new DominoesUI();
 			} else { 
 				System.exit(0);
 			}
 		}else if (game.player.getScore() < game.computer.getScore()){
 			if (JOptionPane.showConfirmDialog(getThisParent(), "You Lost...  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				dispose();
-	            frame = new DominoesUI();
+	            new DominoesUI();
 			} else {
 				System.exit(0);
 			}
 		}else {
 			if (JOptionPane.showConfirmDialog(getThisParent(), "You Tied with the Computer.  Do you want to play again?", "Game Over!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				dispose();
-	            frame = new DominoesUI();
+	            new DominoesUI();
 			} else {
 				System.exit(0);
 			}
@@ -374,7 +373,7 @@ public class DominoesUI extends JFrame {
 		playerScoreStr = "" + game.player.getScore();
 		playerScoreLabel = new JLabel(playerScoreStr);
 		playerScoreLabel.setFont(playerScoreLabel.getFont().deriveFont(50.0f));
-		playerScoreLabel.setHorizontalAlignment(JLabel.CENTER);
+		playerScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		playerScorePanel.add(playerScoreLabel);
 		
 		//End Game Button

@@ -8,18 +8,28 @@ package core;
  */
 public class Dominoes {
 	private Domino []dominoes = new Domino[28];
-	int currIndex;
+	int index;
 	
 	public Dominoes() {
 		int counter = 0;
 		
-		for(int leftVal = Domino.minValue; leftVal <= Domino.maxValue; leftVal++) {
-			for (int rightVal = leftVal; rightVal <= Domino.maxValue; rightVal++) {
+		for(int leftVal = Domino.min; leftVal <= Domino.max; leftVal++) {
+			for (int rightVal = leftVal; rightVal <= Domino.max; rightVal++) {
 				dominoes[counter++] = new Domino(leftVal,rightVal);
 			}
 		}
-		currIndex = 0;
-	}//Constructor
+		index = 0;
+	}
+	
+	public boolean canDraw() {
+		return index < dominoes.length;
+	}
+	
+	public Domino drawDomino() {
+		if(index < dominoes.length)
+			return dominoes[index++];
+		else return null;
+	}
 	
 	public void shuffleDominoes() {
 		for(int i = 0; i < dominoes.length; i++) {
@@ -27,17 +37,7 @@ public class Dominoes {
 			int swapper = (int)(Math.random()*27);
 			dominoes[i] = dominoes[swapper];
 			dominoes[swapper] = temp;
-			currIndex = 0;
+			index = 0;
 		}
-	}//shuffle
-	
-	public Domino drawDomino() {
-		if(currIndex < dominoes.length)
-			return dominoes[currIndex++];
-		else return null;
-	}//drawDomino
-	
-	public boolean canDraw() {
-		return currIndex < dominoes.length;
-	}//canDraw
-}//Dominoes
+	}
+}

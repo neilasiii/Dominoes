@@ -13,11 +13,11 @@ public class Player {
 		}else {
 			name = "Player";
 		}
-	}//Constructor
+	}
 	
 	public Domino getDominoFromHand(int index) {
 		return hand.get(index);
-	}//getDominoFromHand
+	}
 	
 	public Domino removeDominoFromHand(int index) {
 		if(index >= 0 && index < hand.size()) {
@@ -28,11 +28,11 @@ public class Player {
 		}else {
 			return null;
 		}
-	}//removeDominoFromHand
+	}
 	
 	public int dominoCount(){
 		return hand.size();
-	}//dominoCount
+	}
 
 	public boolean dealDomino(Domino dom) {
 		if(dom != null) {
@@ -41,7 +41,7 @@ public class Player {
 		}else {
 			return false;
 		}
-	}//dealTile
+	}
 	
 	public int findDomino(int value) {
 		for(int i = 0; i < hand.size(); i++) {
@@ -50,7 +50,7 @@ public class Player {
 				return i;
 		}
 		return -1;
-	}//findTile
+	}
 	
 	public boolean hasDoubleInHand() {
 		for (int i = 0; i < hand.size(); i++) {
@@ -74,18 +74,18 @@ public class Player {
 	
 	public void clearHand() {
 		hand.clear();
-	}//clearHand
+	}
 	
 	public void clearScore() {
 		score = 0;
-	}//clearScore
+	}
 	
 	public void addToScore(int plus) {
 		score += plus;
-	}//addToScore
+	}
 	
 	/* Getters and Setters -----------------------------------------*/
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
 	public int getScore() {return score;}
-}//Class Player
+}
