@@ -373,7 +373,7 @@ public class DominoesUI extends JFrame {
 		playerScoreStr = "" + game.player.getScore();
 		playerScoreLabel = new JLabel(playerScoreStr);
 		playerScoreLabel.setFont(playerScoreLabel.getFont().deriveFont(50.0f));
-		playerScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		playerScoreLabel.setHorizontalAlignment(JLabel.CENTER);
 		playerScorePanel.add(playerScoreLabel);
 		
 		//End Game Button
