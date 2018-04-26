@@ -292,6 +292,8 @@ public class DominoesUI extends JFrame {
 		game = new Game();
 		game.initGame();
 		game.doFirstMove();
+		
+
 	}
 	
 	private void initComponents() {
@@ -299,6 +301,8 @@ public class DominoesUI extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(1200,800));
 		this.setMinimumSize(new Dimension(1200,800));
+		
+		
 		
 		//Menu
 		menuBar = new JMenuBar();
@@ -445,6 +449,10 @@ public class DominoesUI extends JFrame {
 		this.add(leftButton, BorderLayout.WEST);
 				
 		this.setVisible(true);
+		
+		String name = JOptionPane.showInputDialog("What is your name?");
+		game.player.setName(name);
+		playerHandPanel.setBorder(BorderFactory.createTitledBorder(game.player.getName() + "'s Hand"));
 	}
 	
 }
